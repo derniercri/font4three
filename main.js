@@ -10,6 +10,7 @@ opentype.load('./fonts/Roboto-Black.ttf', function (err, font) {
 });
 
 var convert = function(font) {
+    var index;
     var scale = (1000 * 100) / ( (font.unitsPerEm || 2048) *72);
     var result = {};
     result.glyphs = {};
@@ -17,13 +18,14 @@ var convert = function(font) {
     console.log(typeof font.glyphs)
     console.log(font.glyphs.length)
 
-    for (var i = 0; i < font.glyphs.length; i++) {
-      console.log(font.glyphs[i])
+    for (index in font.glyphs) {
+      console.log("\n\n----------------------------------------------------\n\n\n")
+      console.log(index, font.glyphs[index])
     }
 
     var glyph;
-    Object.keys(font.glyphs).forEach(function(key) {
-        glyph = font.glyphs[key];
+    Object.keys(font.glyphs.glyphs).forEach(function(key) {
+        glyph = font.glyphs.glyphs[key];
 
         console.log(glyph.unicode);
 
@@ -33,7 +35,7 @@ var convert = function(font) {
             token.x_min = Math.round(glyph.xMin * scale);
             token.x_max = Math.round(glyph.xMax * scale);
             token.o = ""
-            if (reverseTypeface.checked) {glyph.path.commands = reverseCommands(glyph.path.commands);}
+            // if (reverseTypeface.checked) {glyph.path.commands = reverseCommands(glyph.path.commands);}
             glyph.path.commands.forEach(function(command,i){
                 if (command.type.toLowerCase() === "c") {command.type = "b";}
                 token.o += command.type.toLowerCase();
