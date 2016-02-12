@@ -14,8 +14,8 @@ The output by default is stdin, use with command line redirection ```>``` to exp
 
 Now you are ready to use your font with THREE.TextGeometry
 
-See more informations about (TextGeometry)[http://threejs.org/docs/#Reference/Extras.Geometries/TextGeometry]
+See more informations about [TextGeometry](http://threejs.org/docs/#Reference/Extras.Geometries/TextGeometry)
 
 # Credit
 
-We just wrap the facetype.js code in a command line tool for more conveniance at use. All credit return to (gero3/facetype)[https://github.com/gero3/facetype.js] for his great work
+We just wrap the facetype.js code in a command line tool for more conveniance at use. All credit return to [gero3/facetype](https://github.com/gero3/facetype.js) for his great work
