@@ -1,6 +1,6 @@
 {
   "name": "font4three",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Font converter for Threejs",
   "main": "./main.js",
   "scripts": {
@@ -26,6 +26,5 @@
     "url": "https://github.com/derniercri/font4three/issues"
   },
   "homepage": "https://github.com/derniercri/font4three#readme",
-  "dependencies": {
-  }
+  "dependencies": {}
 }
