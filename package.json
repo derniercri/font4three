@@ -2,7 +2,7 @@
   "name": "font4three",
   "version": "1.0.0",
   "description": "Font converter for Threejs",
-  "main": "main.js",
+  "main": "./main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,8 +12,14 @@
   },
   "keywords": [
     "font",
-    "threejs"
+    "threejs",
+    "textgeometry",
+    "typeface",
+    "opentype"
   ],
+  "bin": {
+    "f43": "./main.js"
+  },
   "author": "DernierCri",
   "license": "MIT",
   "bugs": {
