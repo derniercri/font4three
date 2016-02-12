@@ -8,7 +8,7 @@ Command line tool to use Font with ThreeJS
 
 ```f43 [font file source]```
 
-The output by default is stdin, use with command line redirection ```>``` to export in file
+The output by default is stdout, use with command line redirection ```>``` to export in file
 
 ```f43 [font file source] > [font file destination].js```
 

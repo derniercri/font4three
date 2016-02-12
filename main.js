@@ -1,30 +1,27 @@
-var opentype = require('opentype.js');
+var opentype = require('./opentype.min');
 
 opentype.load(process.argv[2], function (err, font) {
   if (err) {
-    console.log('Font could not be loaded: ' + err)
+    process.stderr.write('Font could not be loaded: ' + err);
   } else {
     convert(font);
   }
 });
 
-var convert = function(font) {
-    var index;
+
+var convert = function(font){
     var scale = (1000 * 100) / ( (font.unitsPerEm || 2048) *72);
     var result = {};
     result.glyphs = {};
 
-    var glyph;
-    Object.keys(font.glyphs.glyphs).forEach(function(key) {
-        glyph = font.glyphs.glyphs[key];
-
+    font.glyphs.forEach(function(glyph){
         if (glyph.unicode !== undefined) {
+
             var token = {};
             token.ha = Math.round(glyph.advanceWidth * scale);
             token.x_min = Math.round(glyph.xMin * scale);
             token.x_max = Math.round(glyph.xMax * scale);
             token.o = ""
-            glyph.path.commands = reverseCommands(glyph.path.commands);
             glyph.path.commands.forEach(function(command,i){
                 if (command.type.toLowerCase() === "c") {command.type = "b";}
                 token.o += command.type.toLowerCase();
@@ -64,59 +61,17 @@ var convert = function(font) {
     };
     result.resolution = 1000;
     result.original_font_information = font.tables.name;
-
-    if (font.styleName && font.styleName.toLowerCase().indexOf("bold") > -1){
+    if (font.styleName.toLowerCase().indexOf("bold") > -1){
         result.cssFontWeight = "bold";
     } else {
         result.cssFontWeight = "normal";
     };
 
-    if (font.styleName && font.styleName.toLowerCase().indexOf("italic") > -1){
+    if (font.styleName.toLowerCase().indexOf("italic") > -1){
         result.cssFontStyle = "italic";
     } else {
         result.cssFontStyle = "normal";
     };
 
-    console.log("if (_typeface_js && _typeface_js.loadFace) _typeface_js.loadFace("+ JSON.stringify(result) + ");");
-};
-
-var reverseCommands = function(commands){
-
-    var paths = [];
-    var path;
-
-    commands.forEach(function(c){
-        if (c.type.toLowerCase() === "m"){
-            path = [c];
-            paths.push(path);
-        } else if (c.type.toLowerCase() !== "z") {
-            path.push(c);
-        }
-    });
-
-    var reversed = [];
-    paths.forEach(function(p){
-        var result = {"type":"m" , "x" : p[p.length-1].x, "y": p[p.length-1].y};
-        reversed.push(result);
-
-        for(var i = p.length - 1;i > 0; i-- ){
-            var command = p[i];
-            result = {"type":command.type};
-            if (command.x2 !== undefined && command.y2 !== undefined){
-                result.x1 = command.x2;
-                result.y1 = command.y2;
-                result.x2 = command.x1;
-                result.y2 = command.y1;
-            } else if (command.x1 !== undefined && command.y1 !== undefined){
-                result.x1 = command.x1;
-                result.y1 = command.y1;
-            }
-            result.x =  p[i-1].x;
-            result.y =  p[i-1].y;
-            reversed.push(result);
-        }
-
-    });
-
-    return reversed;
+    process.stdout.write("if (_typeface_js && _typeface_js.loadFace) _typeface_js.loadFace("+ JSON.stringify(result) + ");");
 };
