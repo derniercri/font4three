@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var opentype = require('opentype.min');
+var opentype = require(__dirname + '/opentype.min');
 
 opentype.load(process.argv[2], function (err, font) {
   if (err) {
