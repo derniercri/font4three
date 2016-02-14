@@ -1,6 +1,6 @@
 {
   "name": "font4three",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Font converter for Threejs",
   "main": "./main.js",
   "scripts": {
