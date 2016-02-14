@@ -29,7 +29,7 @@ if (process.argv[2]){
 }
 
 
-function convert(font){
+function convert(font) {
     var scale = (1000 * 100) / ( (font.unitsPerEm || 2048) *72);
     var result = {};
     result.glyphs = {};
