@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var opentype = require(__dirname + '/node_modules/opentype.js/dist/opentype.min')
+var opentype = require(__dirname + '/node_modules/opentype.js/dist/opentype.min') // PATH TO OPENTYPE 0.4.6
 
 if (process.argv[2]){
     switch (process.argv[2]) {
